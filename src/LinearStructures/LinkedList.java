@@ -52,7 +52,7 @@ public class LinkedList<T> implements LinearStructInterface<T> {
             this.head = newNode;
         }
 
-        // Otherwise add the new data to the end of the list.
+        // Otherwise, add the new data to the end of the list.
         else{
             Node<T> runner = head;
             while(runner.next != null){

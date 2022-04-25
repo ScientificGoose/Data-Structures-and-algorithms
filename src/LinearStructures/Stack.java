@@ -43,7 +43,7 @@ public class Stack<T> implements LinearStructInterface<T> {
 
     /**
      * This method returns the size of the Stack.
-     * @return The number of elements int he stack.
+     * @return The number of elements in the stack.
      */
     public int size(){
         return size;
@@ -69,10 +69,10 @@ public class Stack<T> implements LinearStructInterface<T> {
     @Override
     public T pop() {
         if(isEmpty()) throw new EmptyStackException();
-            T item = top.data;
-            top = top.next;
-            size--;
-            return item;
+        T item = top.data;
+        top = top.next;
+        size--;
+        return item;
     }
 
     /**

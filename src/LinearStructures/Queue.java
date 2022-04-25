@@ -54,7 +54,7 @@ public class Queue<T> implements LinearStructInterface<T> {
 
     /**
      * This method will add a new Node to the end of the Queue.
-     * @param data
+     * @param data The data to be pushed to the queue
      */
     @Override
     public void push(T data) {
@@ -96,7 +96,7 @@ public class Queue<T> implements LinearStructInterface<T> {
 
     /**
      * Checks if the Queue is empty.
-     * @return
+     * @return A boolean value if the Queue is empty.
      */
     @Override
     public boolean isEmpty() {
