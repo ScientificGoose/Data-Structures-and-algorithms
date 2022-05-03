@@ -2,16 +2,16 @@ package Trees;
 
 import java.util.Arrays;
 
-public class MaxHeap {
+public class MinHeap {
 
     private int[] array;
     private int capacity = 10;
     private int size;
 
     /**
-     * This is the default constructor for MaxHeap.
+     * This is the default constructor for MinHeap.
      */
-    public MaxHeap(){
+    public MinHeap(){
 
         this.size = 0;
         array = new int[capacity];
@@ -31,6 +31,7 @@ public class MaxHeap {
     private int leftChild(int index) {return array[getLeftChildIndex(index)];}
     private int rightChild(int index) {return array[getRightChildIndex(index)];}
     private int parent(int index) {return array[getParentIndex(index)];}
+
 
     /**
      * This method will resize the array if it has reached capacity.
@@ -69,8 +70,8 @@ public class MaxHeap {
     }
 
     /**
-     * This method will return the largest value in the heap, if it exists.
-     * @return The largest value in the heap.
+     * This method will return the smallest value in the heap, if it exists.
+     * @return The smallest value in the heap.
      */
     public int peek(){
         if(size == 0) throw new IllegalStateException();
@@ -78,8 +79,8 @@ public class MaxHeap {
     }
 
     /**
-     * This method will return the largest value in the heap and then remove it from the heap.
-     * @return The largest value in the heap.
+     * This method will return the minimum value in the heap and then remove it from the heap.
+     * @return The smallest value in the heap.
      */
     public int poll(){
         if(size == 0) throw new IllegalStateException();
@@ -108,7 +109,7 @@ public class MaxHeap {
      */
     public void heapifyUp(){
         int index = size - 1;
-        while(hasParent(index) && parent(index) < array[index]){
+        while(hasParent(index) && parent(index) > array[index]){
             swap(getParentIndex(index), index);
             index = getParentIndex(index);
         }
@@ -121,7 +122,7 @@ public class MaxHeap {
         int index = 0;
         while(hasLeftChild(index)) {
             int LargestChild = getLeftChildIndex(index);
-            if (hasRightChild(index) && rightChild(index) > leftChild(index)){
+            if (hasRightChild(index) && rightChild(index) < leftChild(index)){
                 LargestChild = getRightChildIndex(index);
             }
             if(array[index] > array[LargestChild]){
