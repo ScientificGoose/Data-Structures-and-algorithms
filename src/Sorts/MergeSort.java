@@ -29,11 +29,11 @@ public class MergeSort {
 
         // Create a sub array with the left half of the input array.
         for(int i = 0; i < leftSize; i++){
-            leftArray[i] = inputArray[left + 1];
+            leftArray[i] = inputArray[left + i];
         }
         // Create a sub array with the right half of the input array.
-        for(int i = 0; i < rightSize; i++){
-            rightArray[i] = inputArray[mid + 1 + i];
+        for(int j = 0; j < rightSize; j++){
+            rightArray[j] = inputArray[mid + 1 + j];
         }
 
         // Initialize iterators.
@@ -69,11 +69,14 @@ public class MergeSort {
      */
     public void sort(int[] inputArray, int left, int right){
 
-        int midpoint = left + (right - 1)/2;
+        if(left < right) {
 
-        sort(inputArray, left, midpoint);
-        sort(inputArray, midpoint + 1, right);
+            int midpoint = (left + right) / 2;
 
-        merge(inputArray, left, midpoint, right);
+            sort(inputArray, left, midpoint);
+            sort(inputArray, midpoint + 1, right);
+
+            merge(inputArray, left, midpoint, right);
+        }
     }
 }
