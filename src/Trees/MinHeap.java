@@ -125,7 +125,7 @@ public class MinHeap {
             if (hasRightChild(index) && rightChild(index) < leftChild(index)){
                 LargestChild = getRightChildIndex(index);
             }
-            if(array[index] > array[LargestChild]){
+            if(array[index] < array[LargestChild]){
                 break;
             } else {
                 swap(index, LargestChild);
