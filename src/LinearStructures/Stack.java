@@ -10,28 +10,10 @@ import java.util.EmptyStackException;
  *  Worst case O(n) <- The time taken is proportional to the number of elements that need
  *      to be processed.
  */
-public class Stack<T> implements LinearStructInterface<T> {
+public class Stack<T> implements LinearStructureInterface<T>, Pushable<T>, Poppable<T> {
 
-    Node<T> top;
+    SinglyLinkedNode<T> top;
     int size;
-
-    /**
-     * Having a private node class will eliminate the risk of the Nodes/data being changed
-     * from outside the Stack.
-     */
-    private class Node<T>{
-        T data;
-        Node<T> next;
-
-        /**
-         * This is the default constructor.
-         * @param data The data to be stored in the Node.
-         */
-        Node(T data){
-            this.data = data;
-            this.next = null;
-        }
-    }
 
     /**
      * This is the default constructor.
@@ -56,8 +38,8 @@ public class Stack<T> implements LinearStructInterface<T> {
     @Override
     public void push(T data) {
 
-        Node<T> temp = new Node<>(data);
-        temp.next = top;
+        SinglyLinkedNode<T> temp = new SinglyLinkedNode<>(data);
+        temp.setNext(top);
         top = temp;
         size++;
     }
@@ -69,8 +51,8 @@ public class Stack<T> implements LinearStructInterface<T> {
     @Override
     public T pop() {
         if(isEmpty()) throw new EmptyStackException();
-        T item = top.data;
-        top = top.next;
+        T item = top.getData();
+        top.setNext(top.getNext());
         size--;
         return item;
     }
@@ -80,7 +62,7 @@ public class Stack<T> implements LinearStructInterface<T> {
      * @return The data contained in the top node of the stack.
      */
     public T peek(){
-        return top.data;
+        return top.getData();
     }
 
     /**
@@ -100,13 +82,13 @@ public class Stack<T> implements LinearStructInterface<T> {
     @Override
     public boolean contains(T data) {
         if(isEmpty()) {return false;}
-        if(top.data == data){return true;}
-        Node<T> runner = top;
-        while(runner.next != null){
-            if(runner.next.data == data){
+        if(top.getData() == data){return true;}
+        SinglyLinkedNode<T> runner = top;
+        while(runner.getNext() != null){
+            if(runner.getNext().getData() == data){
                 return true;
             }
-            runner = runner.next;
+            runner.setNext(runner.getNext());
         }
         return false;
     }

@@ -1,6 +1,6 @@
 package Hashes;
 
-import LinearStructures.LinkedList;
+import LinearStructures.SinglyLinkedList;
 
 import java.util.Objects;
 

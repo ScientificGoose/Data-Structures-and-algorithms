@@ -15,24 +15,24 @@ class QueueTest<T> {
     @BeforeEach
     void setUp(){
         queue = new Queue<>();
-        queue.push(5);
-        queue.push(2);
-        queue.push(100);
-        queue.push(999);
+        queue.enqueue(5);
+        queue.enqueue(2);
+        queue.enqueue(100);
+        queue.enqueue(999);
     }
 
     @RepeatedTest(5)
     void push() {
         Random random = new Random();
         int testNum = random.nextInt();
-        queue.push(testNum);
+        queue.enqueue(testNum);
         assertEquals(5, queue.peek());
     }
 
     @Test
     void pop() {
-        Integer testOne = queue.pop();
-        Integer testTwo = queue.pop();
+        Integer testOne = queue.dequeue();
+        Integer testTwo = queue.dequeue();
         assertEquals(5, testOne);
         assertEquals(2, testTwo);
     }
@@ -40,29 +40,29 @@ class QueueTest<T> {
     @Test
     void peek() {
         assertEquals(5, queue.peek());
-        queue.pop();
+        queue.dequeue();
         assertEquals(2, queue.peek());
-        queue.pop();
+        queue.dequeue();
         assertEquals(100, queue.peek());
     }
 
     @Test
     void size() {
         assertEquals(4, queue.size());
-        queue.push(11);
+        queue.enqueue(11);
         assertEquals(5, queue.size());
-        queue.pop();
-        queue.pop();
+        queue.dequeue();
+        queue.dequeue();
         assertEquals(3, queue.size());
     }
 
     @Test
     void isEmpty() {
         assertFalse(queue.isEmpty());
-        queue.pop();
-        queue.pop();
-        queue.pop();
-        queue.pop();
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
         assertTrue(queue.isEmpty());
     }
 }

@@ -10,30 +10,11 @@ import java.util.NoSuchElementException;
  *  Worst case O(n) <- The time taken is proportional to the number of elements that need
  *      to be processed.
  */
-public class Queue<T> implements LinearStructInterface<T> {
+public class Queue<T> implements LinearStructureInterface<T>, QueueableInterface<T> {
 
-    Node<T> head;
-    Node<T> tail;
+    SinglyLinkedNode<T> head;
+    SinglyLinkedNode<T> tail;
     int size;
-
-    /**
-     * Having a private node class will eliminate the risk of the Nodes/data being changed
-     * from outside the Queue.
-     */
-    private class Node<T>{
-
-        T data;
-        Node<T> next;
-
-        /**
-         * This is the default constructor.
-         * @param data The data to be stored in the Node.
-         */
-        Node(T data){
-            this.data = data;
-            this.next = null;
-        }
-    }
 
     /**
      * This is the default constructor.
@@ -57,10 +38,10 @@ public class Queue<T> implements LinearStructInterface<T> {
      * @param data The data to be pushed to the queue
      */
     @Override
-    public void push(T data) {
-        Node<T> temp = new Node<>(data);
+    public void enqueue(T data) {
+        SinglyLinkedNode<T> temp = new SinglyLinkedNode<>(data);
         if(tail != null){
-            tail.next = temp;
+            tail.setNext(temp);
         }
         tail = temp;
         if(head == null){
@@ -74,10 +55,10 @@ public class Queue<T> implements LinearStructInterface<T> {
      * @return The data contained in the head Node.
      */
     @Override
-    public T pop() {
+    public T dequeue() {
         if(head == null) throw new NoSuchElementException();
-        T data = head.data;
-        head = head.next;
+        T data = head.getData();
+        head = head.getNext();
         if(head == null){
             tail = null;
         }
@@ -91,7 +72,7 @@ public class Queue<T> implements LinearStructInterface<T> {
      */
     public T peek() {
         if(head == null) throw new NoSuchElementException();
-        return head.data;
+        return head.getData();
     }
 
     /**
@@ -111,13 +92,13 @@ public class Queue<T> implements LinearStructInterface<T> {
     @Override
     public boolean contains(T data) {
         if(isEmpty()){return false;}
-        if(head.data == data){return true;}
-        Node<T> runner = head;
-        while(runner.next != null){
-            if(runner.data == data){
+        if(head.getData() == data){return true;}
+        SinglyLinkedNode<T> runner = head;
+        while(runner.getNext() != null){
+            if(runner.getData() == data){
                 return true;
             }
-            runner = runner.next;
+            runner.setNext(runner.getNext());
         }
         return false;
     }
