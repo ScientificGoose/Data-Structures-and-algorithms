@@ -63,4 +63,11 @@ public class Graph<T> {
             destination.removeEdge(source);
         }
     }
+
+    /**
+     * @return An ArrayList of all vertices in the Graph.
+     */
+    public ArrayList<Vertex<T>> getVertices(){
+        return this.vertices;
+    }
 }
